@@ -1,0 +1,27 @@
+## Project background
+This repository contains code and results from my student research project (Junior Academy of Sciences of Ukraine, 2024) on **Fractal and Seasonal Analysis of Time Series**.
+
+📄 Full paper: [docs/MAN_Fractal_Analysis.pdf](docs/MAN_Fractal_Analysis.pdf)
+
+# Fractal and Seasonal Time Series Analysis
+
+This repository contains code and results from my Junior Academy of Sciences (МАН) research project on **Fractal Properties and Forecasting of Time Series**.  
+The work explores the use of Hurst exponent, Schuster periodogram, ACF/PACF, and SARIMAX/XGBoost models for detecting persistence, cycles, and forecasting.
+
+## Structure
+- `docs/` – PDF of the original paper, figures, and abstract
+- `src/` – clean Python implementations of methods described in the paper
+- `notebooks/` – reproducible experiments and visualizations
+- `data/` – sample dataset
+
+## Highlights
+- ✅ Hurst exponent via R/S analysis  
+- ✅ Schuster periodogram with dominant peak detection  
+- ✅ ADF test for stationarity  
+- ✅ SARIMAX and XGBoost forecasts  
+- ✅ Full reproducibility in Jupyter Notebook
+
+## Quickstart
+```bash
+pip install -r requirements.txt
+jupyter notebook notebooks/analysis.ipynb
