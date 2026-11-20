@@ -2,6 +2,13 @@
 
 Research project by Danylo Zubrii, Junior Academy of Sciences of Ukraine, Mathematics / Statistics section (2024). This repository is undergoing a 2026 reproducibility revision.
 
+
+## Research documents
+
+- [English translation (PDF)](docs/original-research-2024/MAN_Research_Paper_EN.pdf) — AI-assisted translation prepared in 2026.
+- [Original Ukrainian manuscript (DOCX)](docs/original-research-2024/Робота_Зубрій_Данило_Владиславович.docx) — 2024.
+- [Errata and methodological notes](docs/original-research-2024/ERRATA.md).
+
 ## Original study (2024)
 
 The study examined 1,553 daily electricity-consumption observations from Rivne region, Ukraine (2019-07-01 through 2023-09-30), supplied by Rivneoblenergo. It investigated seasonal structure, temporal dependence and associations with daily temperature, comparing statistical and machine-learning forecasting approaches.
