@@ -20,7 +20,7 @@ These are historical manuscript results, not independently reproduced measuremen
 
 The legacy Python modules implement R/S estimation, periodogram-based cycle detection, SARIMAX forecasting and error metrics. The original study included additional methods that are not yet fully restored here.
 
-The 2026 revision aims to establish correct forecast alignment, explicit future exogenous covariates, numerical validation, chronological evaluation and reproducible experiments. See [revision notes](docs/revision-2026.md).
+The 2026 revision adds a separate exploratory study of monthly S&P 500 index averages, chronological forecast evaluation, explicit future covariates and numerical tests. See [S&P 500 study and reproduction instructions](README_RESEARCH_2026.md) and [revision notes](docs/revision-2026.md).
 
 ## Data availability
 
@@ -30,9 +30,9 @@ The original utility dataset is not distributed here. Its availability and redis
 
 Use a virtual environment and install dependencies:
 
-    python -m pip install -r requirements.txt
+    python -m pip install -r requirements-research.txt
 
-The legacy notebooks are not currently a verified end-to-end workflow. No new benchmark or forecast accuracy is claimed.
+Use the research-specific requirements and commands in the linked S&P 500 study. The original electricity dataset is unavailable; the new study is not a replication of the 2024 results.
 
 ## Research integrity
 

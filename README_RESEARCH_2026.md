@@ -21,4 +21,4 @@ Reported R/S slopes: log price 1.0420, log change 0.7289, absolute log change 0.
 
 Forecast RMSE in percentage log-change units: XGBoost 4.2594, historical mean 4.3187, AR(1) 4.3698, zero 4.3915, seasonal naive 5.9649. The small XGBoost advantage is not established as statistically significant or tradeable. These are previous local experiment results, not independently replicated by GitHub CI.
 
-Legacy notebooks and original energy experiments remain incomplete. Future work: daily data, dependence-preserving surrogate tests, DFA, confidence intervals and independent holdout. No trading simulation is performed here.
+Notebooks provide synthetic-method demonstrations and an optional local S&P 500 workflow; original energy experiments remain incomplete. Future work: daily data, dependence-preserving surrogate tests, DFA, confidence intervals and independent holdout. No trading simulation is performed here.

@@ -8,18 +8,13 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from xgboost import XGBRegressor
 
+from .hurst import hurst_rs as estimate_rs
+
 def hurst_rs(x, scales=(8,12,16,24,32,48,64)):
-    x=np.asarray(x,dtype=float)
-    if x.ndim!=1 or not np.isfinite(x).all(): raise ValueError('finite vector required')
-    sizes=[]; values=[]
-    for m in scales:
-        if m<2 or len(x)//m<4: continue
-        a=x[:len(x)//m*m].reshape(-1,m); a=a-a.mean(axis=1,keepdims=True)
-        z=np.column_stack((np.zeros(len(a)),np.cumsum(a,axis=1)))
-        s=a.std(axis=1,ddof=1); r=np.ptp(z,axis=1); ok=(s>0)&(r>0)
-        if ok.any(): sizes.append(m); values.append(np.mean(r[ok]/s[ok]))
-    if len(sizes)<3: raise ValueError('insufficient valid scales')
-    return float(np.polyfit(np.log(sizes),np.log(values),1)[0])
+    h, diagnostics = estimate_rs(x, scales=scales, min_blocks=4)
+    if len(diagnostics["window_sizes"]) < 3:
+        raise ValueError("insufficient valid scales")
+    return h
 
 def permutation(x, repeats=499, seed=42):
     rng=np.random.default_rng(seed); h=hurst_rs(x)

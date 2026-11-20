@@ -2,18 +2,27 @@
 import numpy as np
 
 
-def hurst_rs(x, min_win=16, max_win=None, n_scales=8):
+def hurst_rs(x, min_win=16, max_win=None, n_scales=8, *, scales=None, min_blocks=2):
     """Return the log-log slope and diagnostics, not a long-memory proof."""
     x = np.asarray(x, dtype=float)
     if x.ndim != 1 or not np.isfinite(x).all():
         raise ValueError("expected a finite one-dimensional series")
     n = len(x)
     max_win = n // 4 if max_win is None else max_win
-    if not 2 <= min_win < max_win <= n // 2 or n_scales < 2:
-        raise ValueError("invalid scale range")
-    scales = np.unique(np.round(np.geomspace(min_win, max_win, n_scales)).astype(int))
+    if min_blocks < 2:
+        raise ValueError("at least two blocks required")
+    if scales is None:
+        if not 2 <= min_win < max_win <= n // 2 or n_scales < 2:
+            raise ValueError("invalid scale range")
+        scales = np.unique(np.round(np.geomspace(min_win, max_win, n_scales)).astype(int))
+    else:
+        scales = sorted(set(scales))
+        if any(not isinstance(m, (int, np.integer)) or m < 2 for m in scales):
+            raise ValueError("invalid explicit scale")
     valid, values, counts = [], [], []
     for m in scales:
+        if n // m < min_blocks:
+            continue
         blocks = x[: (n // m) * m].reshape(-1, m)
         centered = blocks - blocks.mean(axis=1, keepdims=True)
         cumulative = np.cumsum(centered, axis=1)

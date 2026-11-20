@@ -20,4 +20,4 @@
 5. Separate original reported results from newly executed experiments.
 6. Restore the full original methodology where data and source materials permit; document remaining limitations.
 
-No 2026 experiments have been executed as of this documentation commit.
+The exploratory S&P 500 workflow has been added. The original utility study remains unreproduced. See the research README for limitations and reproduction instructions.
