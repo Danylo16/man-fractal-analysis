@@ -1,18 +1,28 @@
-# src/metrics.py
+"""Forecast metrics with strict alignment and undefined-value semantics."""
 import numpy as np
 
-def mae(y_true, y_pred) -> float:
-    y_true = np.asarray(y_true, dtype=float)
-    y_pred = np.asarray(y_pred, dtype=float)
-    return float(np.mean(np.abs(y_true - y_pred)))
 
-def mse(y_true, y_pred) -> float:
-    y_true = np.asarray(y_true, dtype=float)
-    y_pred = np.asarray(y_pred, dtype=float)
-    return float(np.mean((y_true - y_pred) ** 2))
+def _pair(y_true, y_pred):
+    a, b = np.asarray(y_true, dtype=float), np.asarray(y_pred, dtype=float)
+    if a.ndim != 1 or a.shape != b.shape or not a.size:
+        raise ValueError("expected aligned nonempty one-dimensional vectors")
+    if not np.isfinite(a).all() or not np.isfinite(b).all():
+        raise ValueError("nonfinite observations")
+    return a, b
 
-def mape(y_true, y_pred) -> float:
-    y_true = np.asarray(y_true, dtype=float)
-    y_pred = np.asarray(y_pred, dtype=float)
-    denom = np.clip(np.abs(y_true), 1e-8, None)
-    return float(np.mean(np.abs((y_true - y_pred) / denom))) * 100.0
+
+def mae(y_true, y_pred):
+    a, b = _pair(y_true, y_pred)
+    return float(np.mean(np.abs(a - b)))
+
+
+def mse(y_true, y_pred):
+    a, b = _pair(y_true, y_pred)
+    return float(np.mean((a - b) ** 2))
+
+
+def mape(y_true, y_pred):
+    a, b = _pair(y_true, y_pred)
+    if np.any(a == 0):
+        raise ValueError("MAPE is undefined at zero actual values")
+    return float(100 * np.mean(np.abs((a - b) / a)))

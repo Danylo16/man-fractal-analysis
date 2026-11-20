@@ -3,3 +3,8 @@ __pycache__/
 *.pyc
 .env
 docs/*.pdf
+
+sp500_local.csv
+results/predictions.csv
+__pycache__/
+.pytest_cache/
